@@ -1,5 +1,5 @@
 platform :ios, '10.0'
 
 target 'MapboxTest' do
-  pod 'Mapbox-iOS-SDK', :path => '/Users/jesse/projects/mapbox-gl-native/build/ios/pkg/dynamic/Mapbox-iOS-SDK-symbols.podspec'
+  pod 'Mapbox-iOS-SDK', podspec: 'https://raw.githubusercontent.com/mapbox/mapbox-gl-native/ios-v3.4.0-beta.2/platform/ios/Mapbox-iOS-SDK-symbols.podspec'
 end
