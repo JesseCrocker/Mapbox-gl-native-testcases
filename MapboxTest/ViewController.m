@@ -10,7 +10,7 @@
 
 @import Mapbox;
 
-@interface ViewController ()
+@interface ViewController () <MGLMapViewDelegate>
 
 @property (nonatomic, strong) MGLMapView *mapView;
 
@@ -21,8 +21,34 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds];
+  self.mapView.delegate = self;
   [self.view addSubview:self.mapView];
 }
 
+- (void)runRasterSourceTest:(MGLStyle*)style {
+  MGLTileSet *tileset =  [[MGLTileSet alloc] initWithTileURLTemplates:@[@"http://tile.openstreetmap.org/{z}/{x}/{y}.png"]
+                                         minimumZoomLevel:0
+                                         maximumZoomLevel:16];
+  MGLRasterSource *source = [[MGLRasterSource alloc] initWithIdentifier:@"openstreetmap"
+                                                                tileSet:tileset
+                                                               tileSize:256];
+  MGLRasterStyleLayer *layerStyle = [[MGLRasterStyleLayer alloc] initWithIdentifier:@"osm"
+                                                                             source:source];
+  [style addSource:source];
+  [style addLayer:layerStyle];
+  
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSLog(@"removing source");
+    [style removeSource:source];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      NSLog(@"adding source");
+      [style addSource:source];
+    });
+  });
+}
+
+- (void)mapView:(MGLMapView *)mapView didFinishLoadingStyle:(MGLStyle *)style {
+  [self runRasterSourceTest:style];
+}
 
 @end
