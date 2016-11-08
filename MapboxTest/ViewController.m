@@ -22,6 +22,15 @@
   [super viewDidLoad];
   self.mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds];
   [self.view addSubview:self.mapView];
+  [self testTypePredicate];
+}
+
+
+- (void)testTypePredicate {
+  MGLGeoJSONSource *source = [[MGLGeoJSONSource alloc] initWithIdentifier:@"source" features:@[] options:@{}];
+  MGLLineStyleLayer *lineStyle = [[MGLLineStyleLayer alloc] initWithIdentifier:@"grid.line"
+                                                                        source:source];
+  lineStyle.predicate = [NSPredicate predicateWithFormat:@"$type == 'LineString'"];
 }
 
 
