@@ -37,6 +37,28 @@
   [style addSource:source];
   [style addLayer:layerStyle];
   
+  [self removeAndReAddSource:source toStyle:style];
+}
+
+
+- (void)runVectorSourceTest:(MGLStyle*)style {
+  MGLTileSet *tileset =  [[MGLTileSet alloc] initWithTileURLTemplates:@[@"https://tile.mapzen.com/mapzen/vector/v1/buildings/{z}/{x}/{y}.mvt"]
+                                                     minimumZoomLevel:0
+                                                     maximumZoomLevel:16];
+  MGLVectorSource *source = [[MGLVectorSource alloc] initWithIdentifier:@"mapzen"
+                                                                tileSet:tileset];
+  
+  MGLFillStyleLayer *fillLayer = [[MGLFillStyleLayer alloc] initWithIdentifier:@"buildings" source:source];
+  fillLayer.fillColor = [MGLStyleValue valueWithRawValue:[UIColor magentaColor]];
+  
+  [style addSource:source];
+  [style addLayer:fillLayer];
+  
+  [self removeAndReAddSource:source toStyle:style];
+}
+
+
+- (void)removeAndReAddSource:(MGLSource*)source toStyle:(MGLStyle*)style {
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     NSLog(@"removing source");
     [style removeSource:source];
@@ -49,6 +71,7 @@
 
 - (void)mapView:(MGLMapView *)mapView didFinishLoadingStyle:(MGLStyle *)style {
   [self runRasterSourceTest:style];
+//  [self runVectorSourceTest:style];
 }
 
 @end
