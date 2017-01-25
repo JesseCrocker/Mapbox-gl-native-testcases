@@ -12,6 +12,7 @@
 		8843ED541DD2036100588C49 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8843ED531DD2036100588C49 /* ViewController.m */; };
 		8843ED591DD2036100588C49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8843ED581DD2036100588C49 /* Assets.xcassets */; };
 		8843ED5C1DD2036100588C49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8843ED5A1DD2036100588C49 /* LaunchScreen.storyboard */; };
+		88DC025B1E38E685007B981C /* ne_110m_admin_1_states_provinces_shp.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 88DC025A1E38E685007B981C /* ne_110m_admin_1_states_provinces_shp.geojson */; };
 		B262D92E5D217C5BCC6639F3 /* libPods-MapboxTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E8832EF76FC258F86DCE81 /* libPods-MapboxTest.a */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		8843ED581DD2036100588C49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8843ED5B1DD2036100588C49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8843ED5D1DD2036100588C49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88DC025A1E38E685007B981C /* ne_110m_admin_1_states_provinces_shp.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ne_110m_admin_1_states_provinces_shp.geojson; sourceTree = "<group>"; };
 		8C8BB0E3D6E61572A1EF6E6D /* Pods-MapboxTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapboxTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapboxTest/Pods-MapboxTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 		8843ED4B1DD2036100588C49 /* MapboxTest */ = {
 			isa = PBXGroup;
 			children = (
+				88DC025A1E38E685007B981C /* ne_110m_admin_1_states_provinces_shp.geojson */,
 				8843ED4F1DD2036100588C49 /* AppDelegate.h */,
 				8843ED501DD2036100588C49 /* AppDelegate.m */,
 				8843ED521DD2036100588C49 /* ViewController.h */,
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8843ED5C1DD2036100588C49 /* LaunchScreen.storyboard in Resources */,
+				88DC025B1E38E685007B981C /* ne_110m_admin_1_states_provinces_shp.geojson in Resources */,
 				8843ED591DD2036100588C49 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +201,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DDE68F0ACC3555F4FA3EE17C /* [CP] Copy Pods Resources */ = {
