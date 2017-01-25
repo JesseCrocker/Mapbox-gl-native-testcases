@@ -45,10 +45,10 @@
 
 #pragma mark - layers
 - (void)mapView:(MGLMapView *)mapView didFinishLoadingStyle:(MGLStyle *)style {
-  [self addShapeLayer];
+  [self addShapeLayer:style];
 }
 
-- (void)addShapeLayer {
+- (void)addShapeLayer:(MGLStyle*)style {
   if(!self.source && !self.layer) {
     NSLog(@"Creating shape layer");
     NSString *path = [[NSBundle mainBundle] pathForResource:@"ne_110m_admin_1_states_provinces_shp"
@@ -71,7 +71,6 @@
   }
   
   NSLog(@"Adding shape layer to style");
-  MGLStyle *style = self.mapView.style;
   [style addSource:self.source];
   [style addLayer:self.layer];
 }
@@ -97,14 +96,7 @@
   NSArray <id <MGLFeature>> * featuresAtPoint = [self.mapView visibleFeaturesAtPoint:point
                                                  inStyleLayersWithIdentifiers:[NSSet setWithObject:self.layer.identifier]];
   NSLog(@"tapped %lu features at point %@", (unsigned long)featuresAtPoint.count, NSStringFromCGPoint(point));
-
-  //This does too
-  CGFloat pickingSize = 8;
-  CGRect pickingRect =  CGRectMake(point.x - pickingSize, point.y - pickingSize, 2*pickingSize, 2*pickingSize);
-  NSArray <id <MGLFeature>> * featuresInRect = [self.mapView visibleFeaturesInRect:pickingRect
-                                                inStyleLayersWithIdentifiers:[NSSet setWithObject:self.layer.identifier]];
-  NSLog(@"tapped %lu features in rect %@", (unsigned long)featuresInRect.count, NSStringFromCGRect(pickingRect));
-}
+ }
 
 
 @end
