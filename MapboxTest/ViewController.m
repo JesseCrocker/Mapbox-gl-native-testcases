@@ -13,13 +13,28 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) MGLMapView *mapView;
-
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self addMapView];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                               repeats:YES
+                                                 block:^(NSTimer * _Nonnull timer) {
+                                                   [self removeMapView];
+                                                   [self addMapView];
+                                                 }];
+}
+
+- (void)removeMapView {
+  [self.mapView removeFromSuperview];
+  self.mapView = nil;
+}
+
+- (void)addMapView {
   self.mapView = [[MGLMapView alloc] initWithFrame:self.view.bounds];
   [self.view addSubview:self.mapView];
 }
